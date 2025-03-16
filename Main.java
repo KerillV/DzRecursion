@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         compare(1);
         compare(2);
+        //compare(3);
         compare(5);
         compare(15);
     }
@@ -26,17 +27,16 @@ public class Main {
 
             if (day == 1) {
                 memory[day - 1] = prev * prePrePrev % 10 + 1;
-                return prev * prePrePrev % 10 + 1;
+                return memory[day - 1];
             }
             if (day == 2) {
                 memory[day - 1] = (prev * prePrePrev % 10 + 1) * startNumbers[startNumbers.length - 2] % 10 + 1;
-                return (prev * prePrePrev % 10 + 1) * startNumbers[startNumbers.length - 2] % 10 + 1;
+                return memory[day - 1];
             }
             if (day == 3) {
-                memory[day - 1] = ((prev * prePrePrev % 10 + 1) * startNumbers[startNumbers.length - 2] % 10 + 1) *
+                memory[day - 1] = chooseHobbyRecursive(startNumbers, day - 1, memory) *
                         startNumbers[startNumbers.length - 1] % 10 + 1;
-                return ((prev * prePrePrev % 10 + 1) * startNumbers[startNumbers.length - 2] % 10 + 1) *
-                        startNumbers[startNumbers.length - 1] % 10 + 1;
+                return memory[day - 1];
             }
         }
 
@@ -47,8 +47,7 @@ public class Main {
         memory[day - 1] = chooseHobbyRecursive(startNumbers, day - 1, memory) *
                 chooseHobbyRecursive(startNumbers, day - 3, memory) % 10 + 1;
 
-        return chooseHobbyRecursive(startNumbers, day - 1, memory) *
-                chooseHobbyRecursive(startNumbers, day - 3, memory) % 10 + 1;
+        return memory[day - 1];
     }
 
     public static int chooseHobbyIterative(int[] startNumbers, int day) {
